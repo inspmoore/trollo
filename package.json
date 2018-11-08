@@ -1,0 +1,27 @@
+{
+  "name": "trollo",
+  "main": "node_modules/expo/AppEntry.js",
+  "private": true,
+  "scripts": {
+    "start": "expo start",
+    "android": "expo start --android",
+    "ios": "expo start --ios",
+    "eject": "expo eject"
+  },
+  "dependencies": {
+    "expo": "^30.0.1",
+    "quick-picker": "^1.0.0",
+    "react": "16.3.1",
+    "react-native": "https://github.com/expo/react-native/archive/sdk-30.0.0.tar.gz",
+    "react-native-input-prompt": "^1.0.0",
+    "react-navigation": "^2.18.2",
+    "react-redux": "^5.1.0",
+    "redux": "^4.0.1",
+    "redux-storage": "^4.1.2",
+    "redux-storage-engine-reactnativeasyncstorage": "^1.0.5"
+  },
+  "devDependencies": {
+    "eslint": "^5.8.0",
+    "eslint-plugin-react": "^7.11.1"
+  }
+}

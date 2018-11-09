@@ -17,95 +17,91 @@ import PropTypes from 'prop-types'
 
 const { width } = Dimensions.get('window')
 
-function Stage({
-  title,
-  id,
-  tasks,
-  createTask,
-  renameStage,
-  navigation,
-  deleteStage,
-  tasksMoving,
-  startMove,
-  endMove,
-  fromStageID,
-  updateTask,
-  deleteTask,
-  taskEdited,
-  onStageMove,
-  stagesMoving,
-  onStageEndMove
-}) {
-  const _handleTaskPress = taskID => {
+class Stage extends React.Component {
+  _handleTaskPress = taskID => {
+    const { tasksMoving, id, navigation, endMove } = this.props
     if (!tasksMoving)
       navigation.navigate('TaskDetails', { id: taskID, stageID: id })
     else endMove({ taskID: taskID, stageID: id })
   }
 
-  const handleLongPress = taskID => {
+  handleLongPress = taskID => {
+    const { tasksMoving, id, startMove } = this.props
     if (!tasksMoving) startMove({ taskID, stageID: id })
   }
 
-  const onAddPress = () => {
+  onAddPress = () => {
+    const { id, createTask } = this.props
     createTask({
       title: 'New task',
       description: '',
       stageID: id,
       freshlyAdded: true
     })
+    setTimeout(() => {
+      this._scroll.scrollToEnd()
+    }, 100)
   }
 
-  const handleStageTitleChange = prop => {
+  handleStageTitleChange = prop => {
+    const { id, renameStage } = this.props
     renameStage({ id, ...prop })
   }
 
-  const onRemoveStage = () => {
+  onRemoveStage = () => {
+    const { id, tasks, deleteStage } = this.props
     deleteStage({ id, tasks })
   }
 
-  const handleStageRemovePress = () => {
+  handleStageRemovePress = () => {
     Alert.alert(
       `Remove ${title}?`,
-      'Are you sure you want to remove the stage with all it\'s tasks? This cannot be undone!',
+      "Are you sure you want to remove the stage with all it's tasks? This cannot be undone!",
       [
         { text: 'Cancel', style: 'cancel' },
-        { text: 'Delete', onPress: onRemoveStage }
+        { text: 'Delete', onPress: this.onRemoveStage }
       ]
     )
   }
 
-  const handleTaskTitleChange = task => {
+  handleTaskTitleChange = task => {
+    const { updateTask } = this.props
     updateTask({ ...task })
   }
 
-  const renderEmptyTask = () => {
+  renderEmptyTask = () => {
+    const { tasksMoving, id, tasks, fromStageID, endMove } = this.props
     if (tasksMoving)
       if (!tasks || id !== fromStageID)
         return (
           <TaskListItem
             onPress={() => endMove({ stageID: id })}
             moving={tasksMoving}
+            id=""
           />
         )
   }
 
-  const handleStageMove = () => {
+  handleStageMove = () => {
+    const { onStageMove, id } = this.props
     onStageMove(id)
   }
 
-  const handleStageEndMove = () => {
+  handleStageEndMove = () => {
+    const { onStageEndMove, id } = this.props
     onStageEndMove(id)
   }
 
-  const _renderTasks = tasks => {
+  _renderTasks = tasks => {
+    const { deleteTask, taskEdited } = this.props
     return tasks.map(task => (
       <TaskListItem
         title={task.title}
         id={task.id}
         key={task.id}
-        onPress={_handleTaskPress}
-        onLongPress={handleLongPress}
-        onChange={handleTaskTitleChange}
+        onPress={this._handleTaskPress}
+        onLongPress={this.handleLongPress}
+        onChange={this.handleTaskTitleChange}
         deleteTask={deleteTask}
         freshlyAdded={task.freshlyAdded}
         taskEdited={taskEdited}
@@ -113,53 +109,64 @@ function Stage({
     ))
   }
 
-  return (
-    <View style={styles.main}>
-      <View style={styles.topBar}>
-        <TextButton
-          title="⟨⟩"
-          onPress={handleStageMove}
-          disabled={tasksMoving}
-        />
-        <EditableText
-          value={title}
-          name="title"
-          onChangeText={handleStageTitleChange}
-          style={styles.stageTitle}
-          editable={!tasksMoving}
-        />
-        <TextButton
-          title="╳"
-          onPress={handleStageRemovePress}
-          disabled={tasksMoving}
-        />
-      </View>
-      <ScrollView keyboardShouldPersistTaps="handled">
-        {tasks && _renderTasks(tasks)}
-        {renderEmptyTask()}
-      </ScrollView>
-      <Button title="Add a task" onPress={onAddPress} disabled={tasksMoving} />
-      {stagesMoving && (
-        <TouchableOpacity
-          style={{
-            position: 'absolute',
-            left: 0,
-            right: 0,
-            top: 0,
-            bottom: 0,
-            backgroundColor: 'white',
-            opacity: 0.5,
-            justifyContent: 'center',
-            alignItems: 'center',
-            borderRadius: 10
-          }}
-          onPress={handleStageEndMove}
+  render() {
+    const { title, tasks, tasksMoving, stagesMoving } = this.props
+
+    return (
+      <View style={styles.main}>
+        <View style={styles.topBar}>
+          <TextButton
+            title="⟨⟩"
+            onPress={this.handleStageMove}
+            disabled={tasksMoving}
+          />
+          <EditableText
+            value={title}
+            name="title"
+            onChangeText={this.handleStageTitleChange}
+            style={styles.stageTitle}
+            editable={!tasksMoving}
+          />
+          <TextButton
+            title="╳"
+            onPress={this.handleStageRemovePress}
+            disabled={tasksMoving}
+          />
+        </View>
+        <ScrollView
+          keyboardShouldPersistTaps="handled"
+          ref={component => (this._scroll = component)}
         >
-          <Text>Tap here to move stage</Text>
-        </TouchableOpacity>
-      )}
-    </View>
-  )
+          {tasks && this._renderTasks(tasks)}
+          {this.renderEmptyTask()}
+        </ScrollView>
+        <Button
+          title="Add a task"
+          onPress={this.onAddPress}
+          disabled={tasksMoving}
+        />
+        {stagesMoving && (
+          <TouchableOpacity
+            style={{
+              position: 'absolute',
+              left: 0,
+              right: 0,
+              top: 0,
+              bottom: 0,
+              backgroundColor: 'white',
+              opacity: 0.7,
+              justifyContent: 'center',
+              alignItems: 'center',
+              borderRadius: 10
+            }}
+            onPress={this.handleStageEndMove}
+          >
+            <Text>Tap here to move stage</Text>
+          </TouchableOpacity>
+        )}
+      </View>
+    )
+  }
 }
 
 const styles = StyleSheet.create({

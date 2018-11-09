@@ -1,11 +1,12 @@
 // eslint-disable-next-line no-unused-vars
 import React from 'react'
-import { Button, ScrollView, View } from 'react-native'
+import { KeyboardAvoidingView, ScrollView, View } from 'react-native'
 import Prompt from 'react-native-input-prompt'
 import Stage from './Stage'
 import { getTasksById } from '../state/reducers/taskReducer'
 import TextButton from './TextButton'
 import PropTypes from 'prop-types'
+import { Header } from 'react-navigation'
 
 class Stages extends React.Component {
   static navigationOptions = ({ navigation }) => {
@@ -157,15 +158,21 @@ class Stages extends React.Component {
     if (Array.isArray(stages))
       return (
         <View style={{ flex: 1 }}>
-          <ScrollView
-            horizontal={true}
-            pagingEnabled={true}
-            showsVerticalScrollIndicator={true}
-            ref={component => (this._scrollRef = component)}
-            keyboardShouldPersistTaps="always"
+          <KeyboardAvoidingView
+            keyboardVerticalOffset={Header.HEIGHT + 40}
+            style={{ flex: 1 }}
+            behavior="padding"
           >
-            {this._renderStages()}
-          </ScrollView>
+            <ScrollView
+              horizontal={true}
+              pagingEnabled={true}
+              showsVerticalScrollIndicator={true}
+              ref={component => (this._scrollRef = component)}
+              keyboardShouldPersistTaps="handled"
+            >
+              {this._renderStages()}
+            </ScrollView>
+          </KeyboardAvoidingView>
           <Prompt
             visible={this.state.prompt}
             title="Create new stage"

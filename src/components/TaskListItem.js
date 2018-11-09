@@ -40,7 +40,7 @@ class TaskListItem extends React.Component {
         <View style={[style.main, style.editMode]}>
           <EditableText
             value={title}
-            style={[{ lineHeight: 14, flex: 1 }, style.title]}
+            style={[{ lineHeight: 20, flex: 1 }, style.title]}
             onChangeText={this.handleTitleChange}
             name="title"
             placeholder="Task name"
@@ -49,6 +49,8 @@ class TaskListItem extends React.Component {
             onBlur={() => {
               this.props.taskEdited({ id })
             }}
+            multiline={false}
+            returnKeyType="done"
           />
           <TouchableOpacity onPress={this.handleDeletePress}>
             <Text>X</Text>

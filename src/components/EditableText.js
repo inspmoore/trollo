@@ -13,7 +13,8 @@ function EditableText({
   editable,
   autoFocus,
   onBlur,
-  numberOfLines = 1
+  numberOfLines = 1,
+  returnKeyType
 }) {
   const handleChange = text => {
     const o = {}
@@ -32,6 +33,7 @@ function EditableText({
       onBlur={onBlur}
       underlineColorAndroid="transparent"
       numberOfLines={numberOfLines}
+      returnKeyType={returnKeyType}
     />
   )
 }

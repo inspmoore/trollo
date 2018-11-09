@@ -186,7 +186,15 @@ const styles = StyleSheet.create({
 Stage.propTypes = {
   title: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   id: PropTypes.string.isRequired,
-  tasks: PropTypes.array,
+  tasks: PropTypes.arrayOf(
+    PropTypes.shape({
+      id: PropTypes.string,
+      title: PropTypes.string,
+      description: PropTypes.string,
+      teamMemberID: PropTypes.string,
+      freshlyAdded: PropTypes.bool
+    })
+  ),
   createTask: PropTypes.func.isRequired,
   renameStage: PropTypes.func.isRequired,
   navigation: PropTypes.object,

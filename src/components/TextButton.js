@@ -1,5 +1,6 @@
 import React from 'react'
 import { TouchableOpacity, Text, StyleSheet } from 'react-native'
+import PropTypes from 'prop-types'
 
 function TextButton({ title, onPress, onLongPress, disabled }) {
   return (
@@ -26,5 +27,12 @@ const style = StyleSheet.create({
     fontWeight: 'bold'
   }
 })
+
+TextButton.propTypes = {
+  title: PropTypes.string,
+  onPress: PropTypes.func,
+  onLongPress: PropTypes.func,
+  disabled: PropTypes.bool
+}
 
 export default TextButton

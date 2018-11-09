@@ -23,6 +23,7 @@ export default function reducer(state = _initialState, action) {
     return state.map(task => {
       if (task.id === action.payload.taskID)
         return { ...task, teamMemberID: action.payload.memberID }
+      return task
     })
   }
 

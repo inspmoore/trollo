@@ -79,7 +79,12 @@ const styles = StyleSheet.create({
 
 SelectList.propTypes = {
   value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-  data: PropTypes.array.isRequired,
+  data: PropTypes.arrayOf(
+    PropTypes.shape({
+      id: PropTypes.string.isRequired,
+      label: PropTypes.string
+    })
+  ).isRequired,
   onSelect: PropTypes.func
 }
 

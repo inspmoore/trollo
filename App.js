@@ -14,8 +14,6 @@ import MemberDetailsContainer from './src/containers/MemberDetailsContainer'
 import MoveTaskContextProvider from './src/state/context/MoveTaskContextProvider'
 import { Text } from 'react-native'
 
-// AsyncStorage.removeItem('@Trollo:state')
-
 const StagesStack = createStackNavigator(
   {
     Stages: StagesContainer,

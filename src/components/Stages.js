@@ -5,6 +5,7 @@ import Prompt from 'react-native-input-prompt'
 import Stage from './Stage'
 import { getTasksById } from '../state/reducers/taskReducer'
 import TextButton from './TextButton'
+import PropTypes from 'prop-types'
 
 class Stages extends React.Component {
   static navigationOptions = ({ navigation }) => {
@@ -181,6 +182,42 @@ class Stages extends React.Component {
       )
     return <Text>No stage boards. Add one!</Text>
   }
+}
+
+Stages.propTypes = {
+  cancelMove: PropTypes.func,
+  cancelStageMove: PropTypes.func,
+  createStage: PropTypes.func,
+  createTask: PropTypes.func,
+  deleteStage: PropTypes.func,
+  deleteTask: PropTypes.func,
+  endMove: PropTypes.func,
+  endStageMove: PropTypes.func,
+  fromStageID: PropTypes.string,
+  navigation: PropTypes.object,
+  renameStage: PropTypes.func,
+  stages: PropTypes.arrayOf(
+    PropTypes.shape({
+      id: PropTypes.string,
+      title: PropTypes.string,
+      tasks: PropTypes.arrayOf(PropTypes.string)
+    })
+  ),
+  stagesMoving: PropTypes.bool,
+  startMove: PropTypes.func,
+  startStageMove: PropTypes.func,
+  taskEdited: PropTypes.func,
+  tasks: PropTypes.arrayOf(
+    PropTypes.shape({
+      id: PropTypes.string.isRequired,
+      title: PropTypes.string,
+      description: PropTypes.string,
+      teamMemberID: PropTypes.string,
+      freshlyAdded: PropTypes.bool
+    })
+  ),
+  tasksMoving: PropTypes.bool,
+  updateTask: PropTypes.func
 }
 
 export default Stages

@@ -6,7 +6,7 @@ import * as storage from 'redux-storage'
 import createEngine from 'redux-storage-engine-reactnativeasyncstorage'
 
 const reducer = storage.reducer(reducers)
-const persistanceEngine = createEngine('@Trollo:state')
+const persistanceEngine = createEngine('@Trollo:state001')
 
 const swapTasksMiddleware = store => next => action => {
   next(action)

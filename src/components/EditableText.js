@@ -12,7 +12,8 @@ function EditableText({
   placeholder,
   editable,
   autoFocus,
-  onBlur
+  onBlur,
+  numberOfLines = 1
 }) {
   const handleChange = text => {
     const o = {}
@@ -30,6 +31,7 @@ function EditableText({
       autoFocus={autoFocus}
       onBlur={onBlur}
       underlineColorAndroid="transparent"
+      numberOfLines={numberOfLines}
     />
   )
 }
@@ -43,7 +45,8 @@ EditableText.propTypes = {
   placeholder: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   editable: PropTypes.bool,
   autoFocus: PropTypes.bool,
-  onBlur: PropTypes.func
+  onBlur: PropTypes.func,
+  numberOfLines: PropTypes.number
 }
 
 export default EditableText

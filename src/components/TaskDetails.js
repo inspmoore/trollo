@@ -3,6 +3,7 @@ import React from 'react'
 import { View, Button, StyleSheet, Alert } from 'react-native'
 import LabeledValue from './LabeledValue'
 import EditableText from './EditableText'
+import PropTypes from 'prop-types'
 
 function TaskDetails({
   task,
@@ -73,6 +74,7 @@ function TaskDetails({
             onChangeText={handleChange}
             style={styles.description}
             placeholder="Optional description"
+            numberOfLines={5}
           />
           <LabeledValue
             label="Delegated to"
@@ -103,8 +105,31 @@ const styles = StyleSheet.create({
     fontSize: 16,
     color: '#555555',
     minHeight: 100,
-    backgroundColor: '#fafafa'
+    backgroundColor: '#fafafa',
+    textAlignVertical: 'top'
   }
 })
+
+TaskDetails.propTypes = {
+  task: PropTypes.shape({
+    id: PropTypes.string.isRequired,
+    title: PropTypes.string,
+    description: PropTypes.string,
+    teamMemberID: PropTypes.string,
+    freshlyAdded: PropTypes.bool
+  }),
+  members: PropTypes.arrayOf(
+    PropTypes.shape({
+      id: PropTypes.string.isRequired,
+      name: PropTypes.string,
+      surname: PropTypes.string
+    })
+  ),
+  stageID: PropTypes.string,
+  currentStageTitle: PropTypes.string,
+  navigation: PropTypes.object,
+  updateTask: PropTypes.func,
+  deleteTask: PropTypes.func
+}
 
 export default TaskDetails

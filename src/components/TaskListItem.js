@@ -7,6 +7,7 @@ import {
   Keyboard
 } from 'react-native'
 import EditableText from './EditableText'
+import PropTypes from 'prop-types'
 
 class TaskListItem extends React.Component {
   handlePress = () => {
@@ -88,5 +89,16 @@ const style = StyleSheet.create({
     fontSize: 16
   }
 })
+
+TaskListItem.propTypes = {
+  deleteTask: PropTypes.func,
+  freshlyAdded: PropTypes.bool,
+  id: PropTypes.string.isRequired,
+  onChange: PropTypes.func,
+  onLongPress: PropTypes.func,
+  onPress: PropTypes.func,
+  taskEdited: PropTypes.func,
+  title: PropTypes.string
+}
 
 export default TaskListItem

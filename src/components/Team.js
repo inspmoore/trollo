@@ -5,11 +5,11 @@ import {
   FlatList,
   StyleSheet,
   View,
-  Button,
   TouchableOpacity
 } from 'react-native'
 import { uuidv4 } from '../helpers'
 import TextButton from './TextButton'
+import PropTypes from 'prop-types'
 
 class Team extends React.Component {
   static navigationOptions = ({ navigation }) => {
@@ -98,5 +98,17 @@ const styles = StyleSheet.create({
     fontSize: 16
   }
 })
+
+Team.propTypes = {
+  members: PropTypes.arrayOf(
+    PropTypes.shape({
+      id: PropTypes.string.isRequired,
+      name: PropTypes.string,
+      surname: PropTypes.string
+    })
+  ),
+  addMember: PropTypes.func,
+  navigation: PropTypes.object.isRequired
+}
 
 export default Team

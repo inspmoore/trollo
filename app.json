@@ -1,7 +1,7 @@
 {
   "expo": {
     "name": "trollo",
-    "description": "Copy-cat of a popular kanban app.",
+    "description": "Copycat of a popular kanban app.",
     "slug": "trollo",
     "privacy": "public",
     "sdkVersion": "30.0.0",

@@ -2278,6 +2278,10 @@ expo-sms@~1.0.2:
     expo-core "~1.1.0"
     expo-permissions-interface "~1.1.0"
 
+"expo-turbo-image@https://github.com/inspmoore/expo-turbo-image.git":
+  version "1.1"
+  resolved "https://github.com/inspmoore/expo-turbo-image.git#f9a8ba34bf6a669a6fcf6799e576631c4ea4e5c3"
+
 expo@^30.0.1:
   version "30.0.2"
   resolved "https://registry.yarnpkg.com/expo/-/expo-30.0.2.tgz#f320f4f5d9da04746ebb6a478e5a11e56d14b7cd"

@@ -159,7 +159,7 @@ class Stages extends React.Component {
       return (
         <View style={{ flex: 1 }}>
           <KeyboardAvoidingView
-            keyboardVerticalOffset={Header.HEIGHT + 40}
+            keyboardVerticalOffset={Header.HEIGHT + 20}
             style={{ flex: 1 }}
             behavior="padding"
           >

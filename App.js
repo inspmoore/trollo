@@ -39,7 +39,7 @@ const RootNav = createBottomTabNavigator(
   },
   {
     navigationOptions: ({ navigation }) => ({
-      tabBarIcon: ({ focused, horizontal, tintColor }) => {
+      tabBarIcon: () => {
         const { routeName } = navigation.state
         let iconText
         if (routeName === 'Stages') {
@@ -47,9 +47,6 @@ const RootNav = createBottomTabNavigator(
         } else if (routeName === 'Team') {
           iconText = '🧔'
         }
-
-        // You can return any component that you like here! We usually use an
-        // icon component from react-native-vector-icons
         return <Text>{iconText}</Text>
       }
     }),
